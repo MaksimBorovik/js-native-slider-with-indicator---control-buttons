@@ -8,38 +8,35 @@ let pausePlayButton = document.querySelector('#pause-play');
 let nextButton = document.querySelector('#next');
 let previousButton = document.querySelector('#previous');
 
+let sliderPanel = document.querySelector('.slider-panel');
 let indContainer = document.querySelector('.slider-panel__navigation');
 let indItem = document.querySelectorAll('.indicator');
 
-let sliderPanel = document.querySelectorAll('.slider-panel');
+sliderPanel.style.display = 'flex';
 
-for (let i = 0; i < sliderPanel.length; i++) {
-    sliderPanel[i].style.display = 'flex';
-}
-
-pausePlayButton.onclick = function () {
+pausePlayButton.addEventListener('click', () => {
     if (playing) pauseSlideShow();
     else playSlideShow();
-};
+});
 
-nextButton.onclick = function () {
+nextButton.addEventListener('click', () => {
     pauseSlideShow();
     nextSlide();
-};
+});
 
-previousButton.onclick = function () {
+previousButton.addEventListener('click', () => {
     pauseSlideShow();
     prevSlide();
-};
+});
 
-indContainer.onclick = function (event) {
+indContainer.addEventListener('click', (event) => {
     let target = event.target;
 
     if (target.classList.contains("indicator")) {
         pauseSlideShow();
         goToSlide(+target.getAttribute("data-slide-to"));
     }
-};
+});
 
 //---------------------------------------------------------------------
 document.addEventListener('keydown', keyNavigation);
@@ -58,7 +55,7 @@ function keyNavigation(event) {
         if (playing) pauseSlideShow();
         else playSlideShow();
     }
-};
+}
 
 //---------------------------------------------------------------------
 
@@ -75,8 +72,8 @@ function goToSlide(n) {
     indItem[currentSliderItem].classList.toggle('active');
     indItem[currentSliderItem].className = 'far fa-circle indicator';
 
-
     currentSliderItem = (slider.length + n) % slider.length;
+
     slider[currentSliderItem].className = 'slider-item active';
     indItem[currentSliderItem].classList.toggle('active');
     indItem[currentSliderItem].className = 'fas fa-circle indicator';
