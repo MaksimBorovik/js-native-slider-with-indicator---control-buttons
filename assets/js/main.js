@@ -12,6 +12,38 @@ let sliderPanel = document.querySelector('.slider-panel');
 let indContainer = document.querySelector('.slider-panel__navigation');
 let indItem = document.querySelectorAll('.indicator');
 
+function nextSlide() {
+    goToSlide(currentSliderItem + 1);
+}
+
+function prevSlide() {
+    goToSlide(currentSliderItem - 1);
+}
+
+function goToSlide(n) {
+    slider[currentSliderItem].className = 'slider-item';
+    indItem[currentSliderItem].classList.toggle('active');
+    indItem[currentSliderItem].className = 'far fa-circle indicator';
+
+    currentSliderItem = (slider.length + n) % slider.length;
+
+    slider[currentSliderItem].className = 'slider-item active';
+    indItem[currentSliderItem].classList.toggle('active');
+    indItem[currentSliderItem].className = 'fas fa-circle indicator';
+}
+
+function pauseSlideShow() {
+    pausePlayButton.className = 'far fa-play-circle';
+    playing = false;
+    clearInterval(sliderInterval);
+}
+
+function playSlideShow() {
+    pausePlayButton.className = 'far fa-pause-circle';
+    playing = true;
+    sliderInterval = setInterval(nextSlide, 3000);
+}
+
 sliderPanel.style.display = 'flex';
 
 pausePlayButton.addEventListener('click', () => {
@@ -58,35 +90,3 @@ function keyNavigation(event) {
 }
 
 //---------------------------------------------------------------------
-
-function nextSlide() {
-    goToSlide(currentSliderItem + 1);
-}
-
-function prevSlide() {
-    goToSlide(currentSliderItem - 1);
-}
-
-function goToSlide(n) {
-    slider[currentSliderItem].className = 'slider-item';
-    indItem[currentSliderItem].classList.toggle('active');
-    indItem[currentSliderItem].className = 'far fa-circle indicator';
-
-    currentSliderItem = (slider.length + n) % slider.length;
-
-    slider[currentSliderItem].className = 'slider-item active';
-    indItem[currentSliderItem].classList.toggle('active');
-    indItem[currentSliderItem].className = 'fas fa-circle indicator';
-}
-
-function pauseSlideShow() {
-    pausePlayButton.className = 'far fa-play-circle';
-    playing = false;
-    clearInterval(sliderInterval);
-}
-
-function playSlideShow() {
-    pausePlayButton.className = 'far fa-pause-circle';
-    playing = true;
-    sliderInterval = setInterval(nextSlide, 3000);
-}
