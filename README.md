@@ -1,2 +1,2 @@
 **Check out the result on page:**
-https://mirrorimage7.github.io/js-native-slider-with-indicator-and-control-buttons/
+https://mirror-image.github.io/js-native-slider-with-indicator-and-control-buttons/
